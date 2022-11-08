@@ -30,6 +30,7 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time')
     use_jsp_gui = LaunchConfiguration('use_jsp_gui')
     use_rviz = LaunchConfiguration('use_rviz')
+    use_controller = LaunchConfiguration('use_controller')
 
     urdf_file_arg = DeclareLaunchArgument(
         name='urdf_file',
@@ -66,6 +67,12 @@ def generate_launch_description():
         default_value='True',
         description='flag to start RVIZ'
     )
+    
+    use_controller_arg = DeclareLaunchArgument(
+        name='use_controller',
+        default_value='False',
+        description='flag to start PADWQ controller'
+    )
 
     # define nodes
     robot_state_publisher_node = Node(
@@ -101,6 +108,13 @@ def generate_launch_description():
         arguments=['-d', rviz_conf_file]
     )
 
+    controller_node = Node(
+        condition=IfCondition(use_controller),
+        package='padwq',
+        executable='controller',
+        name='controller'
+    )
+
     ld = LaunchDescription([
                                urdf_file_arg,
                                rviz_conf_arg,
@@ -108,10 +122,12 @@ def generate_launch_description():
                                use_sim_time_arg,
                                use_jsp_gui_arg,
                                use_rviz_arg,
+                               use_controller_arg,
                                robot_state_publisher_node,
                                joint_state_publisher_node,
                                joint_state_publisher_gui_node,
-                               rviz_node
+                               rviz_node,
+                               controller_node
                            ])
 
     return ld
