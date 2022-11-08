@@ -1,0 +1,317 @@
+<?xml version="1.0"?>
+<robot name="padwq">
+    <material name="white">
+        <color rgba="1 1 1 1"/>
+    </material>
+
+    <link name="base_link">
+    </link>
+
+    <joint name="body_to_base" type="fixed">
+        <parent link="base_link"/>
+        <child link="body"/>
+        <origin xyz="-0.166 -0.2305 0.2975"/>
+    </joint>
+
+    <link name="body">
+        <visual>
+            <geometry>
+                <box size="0.072 0.4831 0.1072"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0.02155 0"/>
+        </visual>
+    </link>
+
+    <!-- ======================== torso ============================ -->   
+    <joint name="body_to_Rtorso" type="fixed">
+        <parent link="body"/>
+        <child link="Rtorso"/>
+        <origin xyz="0.086 0 0"/>
+    </joint>  
+
+    <link name="Rtorso">
+        <visual>
+            <geometry>
+                <cylinder length="0.31" radius="0.05"/>
+            </geometry>
+            <origin rpy="1.57 0 0" xyz="0 0 0"/>
+        </visual>
+    </link>
+
+    <joint name="body_to_Ltorso" type="fixed">
+        <parent link="body"/>
+        <child link="Ltorso"/>
+        <origin xyz="-0.086 0 0"/>
+    </joint>  
+
+    <link name="Ltorso">
+        <visual>
+            <geometry>
+                <cylinder length="0.31" radius="0.05"/>
+            </geometry>
+            <origin rpy="1.57 0 0" xyz="0 0 0"/>
+        </visual>
+    </link>    
+
+    <!-- ========================FR leg============================ -->    
+    <joint name="body_to_FRac" type="revolute">
+        <axis xyz="0 1 0"/>
+        <parent link="body"/>
+        <child link="FRac"/>
+        <origin xyz="0.036 0.2095 0"/>
+        <limit effort="300" velocity="0.1" lower="-0.523599" upper="0.523599"/>
+    </joint>  
+
+    <link name="FRac">
+        <visual>
+            <geometry>
+                <cylinder length="0.13" radius="0.021"/>
+            </geometry>
+            <origin rpy="0 1.57 0" xyz="0.065 0 0"/>
+        </visual>
+    </link>
+
+    <joint name="FRac_to_FRleg1_5" type="revolute">
+        <parent link="FRac"/>
+        <child link="FRleg1_5"/>
+        <origin xyz="0.125 0 0"/>
+        <limit effort="300" velocity="0.1" lower="-0.82" upper="1.47"/>
+    </joint>  
+
+    <link name="FRleg1_5">
+        <visual>
+            <origin rpy="-1.57 0.47 1.57" xyz="-0.07 -0.147 0.074"/>
+            <geometry>
+		    <mesh filename="file://$(find padwq)/meshes/leg1_5.stl" scale="-0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+    </link>  
+
+    <joint name="FRleg1_5_to_FRleg4" type="revolute">
+        <parent link="FRleg1_5"/>
+        <child link="FRleg4"/>
+        <origin xyz="-0.007 -0.155 -0.153"/>
+        <limit effort="300" velocity="0.1" lower="-1.63" upper="0.95"/>
+    </joint>  
+
+    <link name="FRleg4">
+        <visual>
+            <origin rpy="-1.57 -0.47 -1.57" xyz="0.063 0.0492 0.1717"/>
+            <geometry>
+                <mesh filename="file://$(find padwq)/meshes/leg4.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+    </link>  
+
+    <joint name="FRleg4_to_FRball_leg4_1" type="fixed">
+        <parent link="FRleg4"/>
+        <child link="FRball_leg4_1"/>
+        <origin xyz="0 0.14 -0.1176"/>
+    </joint>  
+
+    <link name="FRball_leg4_1">
+        <visual>
+            <origin rpy="0 -1.57 1.57" xyz="0 0 -0.0269"/>
+            <geometry>
+                <mesh filename="file://$(find padwq)/meshes/ball_leg4_1.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <!-- ========================BR leg============================ -->    
+
+    <joint name="body_to_BRac" type="revolute">
+        <axis xyz="0 1 0"/>
+        <parent link="body"/>
+        <child link="BRac"/>
+        <origin xyz="0.036 -0.2095 0"/>
+        <limit effort="300" velocity="0.1" lower="-0.523599" upper="0.523599"/>
+    </joint>  
+
+    <link name="BRac">
+        <visual>
+            <geometry>
+                <cylinder length="0.13" radius="0.021"/>
+            </geometry>
+            <origin rpy="0 1.57 0" xyz="0.065 0 0"/>
+        </visual>
+    </link>
+
+    <joint name="BRac_to_BRleg1_5" type="revolute">
+        <parent link="BRac"/>
+        <child link="BRleg1_5"/>
+        <origin xyz="0.125 0 0"/>
+        <limit effort="300" velocity="0.1" lower="-0.82" upper="1.47"/>
+    </joint>  
+
+    <link name="BRleg1_5">
+        <visual>
+            <origin rpy="-1.57 0.47 1.57" xyz="-0.07 -0.147 0.074"/>
+            <geometry>
+                <mesh filename="file://$(find padwq)/meshes/leg1_5.stl" scale="-0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+    </link>  
+
+    <joint name="BRleg1_5_to_BRleg4" type="revolute">
+        <parent link="BRleg1_5"/>
+        <child link="BRleg4"/>
+        <origin xyz="-0.007 -0.155 -0.153"/>
+        <limit effort="300" velocity="0.1" lower="-1.63" upper="0.95"/>
+    </joint>  
+
+    <link name="BRleg4">
+        <visual>
+            <origin rpy="-1.57 -0.47 -1.57" xyz="0.063 0.0492 0.1717"/>
+            <geometry>
+                <mesh filename="file://$(find padwq)/meshes/leg4.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+    </link>  
+
+    <joint name="BRleg4_to_BRball_leg4_1" type="fixed">
+        <parent link="BRleg4"/>
+        <child link="BRball_leg4_1"/>
+        <origin xyz="0 0.14 -0.1176"/>
+    </joint>  
+
+    <link name="BRball_leg4_1">
+        <visual>
+            <origin rpy="0 -1.57 1.57" xyz="0 0 -0.0269"/>
+            <geometry>
+                <mesh filename="file://$(find padwq)/meshes/ball_leg4_1.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <!-- ========================FL leg============================ -->   
+    <joint name="body_to_FLac" type="revolute">
+        <axis xyz="0 1 0"/>
+        <parent link="body"/>
+        <child link="FLac"/>
+        <origin xyz="-0.036 0.2095 0"/>
+        <limit effort="300" velocity="0.1" lower="-0.523599" upper="0.523599"/>
+    </joint>  
+
+    <link name="FLac">
+        <visual>
+            <geometry>
+                <cylinder length="0.13" radius="0.021"/>
+            </geometry>
+            <origin rpy="0 1.57 0" xyz="-0.065 0 0"/>
+        </visual>
+    </link>
+
+    <joint name="FLac_to_FLleg1_5" type="revolute">
+        <parent link="FLac"/>
+        <child link="FLleg1_5"/>
+        <origin xyz="-0.125 0 0"/>
+        <limit effort="300" velocity="0.1" lower="-0.82" upper="1.47"/>
+    </joint>  
+
+    <link name="FLleg1_5">
+        <visual>
+            <origin rpy="-1.57 -0.47 -1.57" xyz="0.07 -0.147 0.074"/>
+            <geometry>
+                <mesh filename="file://$(find padwq)/meshes/leg1_5.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+    </link>  
+
+    <joint name="FLleg1_5_to_FLleg4" type="revolute">
+        <parent link="FLleg1_5"/>
+        <child link="FLleg4"/>
+        <origin xyz="0.007 -0.155 -0.153"/>
+        <limit effort="300" velocity="0.1" lower="-1.63" upper="0.95"/>
+    </joint>  
+
+    <link name="FLleg4">
+        <visual>
+            <origin rpy="-1.57 -0.47 -1.57" xyz="0.063 0.0492 0.1717"/>
+            <geometry>
+                <mesh filename="file://$(find padwq)/meshes/leg4.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+    </link>  
+
+    <joint name="FLleg4_to_FLball_leg4_1" type="fixed">
+        <parent link="FLleg4"/>
+        <child link="FLball_leg4_1"/>
+        <origin xyz="0 0.14 -0.1176"/>
+    </joint>  
+
+    <link name="FLball_leg4_1">
+        <visual>
+            <origin rpy="0 -1.57 1.57" xyz="0 0 -0.0269"/>
+            <geometry>
+                <mesh filename="file://$(find padwq)/meshes/ball_leg4_1.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+    </link> 
+
+    <!-- ========================BL leg============================ -->   
+    <joint name="body_to_BLac" type="revolute">
+        <axis xyz="0 1 0"/>
+        <parent link="body"/>
+        <child link="BLac"/>
+        <origin xyz="-0.036 -0.2095 0"/>
+        <limit effort="300" velocity="0.1" lower="-0.523599" upper="0.523599"/>
+    </joint>  
+
+    <link name="BLac">
+        <visual>
+            <geometry>
+                <cylinder length="0.13" radius="0.021"/>
+            </geometry>
+            <origin rpy="0 1.57 0" xyz="-0.065 0 0"/>
+        </visual>
+    </link>
+
+    <joint name="BLac_to_BLleg1_5" type="revolute">
+        <parent link="BLac"/>
+        <child link="BLleg1_5"/>
+        <origin xyz="-0.125 0 0"/>
+        <limit effort="300" velocity="0.1" lower="-0.82" upper="1.47"/>
+    </joint>  
+
+    <link name="BLleg1_5">
+        <visual>
+            <origin rpy="-1.57 -0.47 -1.57" xyz="0.07 -0.147 0.074"/>
+            <geometry>
+                <mesh filename="file://$(find padwq)/meshes/leg1_5.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+    </link>  
+
+    <joint name="BLleg1_5_to_BLleg4" type="revolute">
+        <parent link="BLleg1_5"/>
+        <child link="BLleg4"/>
+        <origin xyz="0.007 -0.155 -0.153"/>
+        <limit effort="300" velocity="0.1" lower="-1.63" upper="0.95"/>
+    </joint>  
+
+    <link name="BLleg4">
+        <visual>
+            <origin rpy="-1.57 -0.47 -1.57" xyz="0.063 0.0492 0.1717"/>
+            <geometry>
+                <mesh filename="file://$(find padwq)/meshes/leg4.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+    </link>  
+
+    <joint name="BLleg4_to_BLball_leg4_1" type="fixed">
+        <parent link="BLleg4"/>
+        <child link="BLball_leg4_1"/>
+        <origin xyz="0 0.14 -0.1176"/>
+    </joint>  
+
+    <link name="BLball_leg4_1">
+        <visual>
+            <origin rpy="0 -1.57 1.57" xyz="0 0 -0.0269"/>
+            <geometry>
+                <mesh filename="file://$(find padwq)/meshes/ball_leg4_1.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+    </link>   
+
+</robot>  
