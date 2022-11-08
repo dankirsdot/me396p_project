@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="padwq">
-    <material name="white">
-        <color rgba="1 1 1 1"/>
+    <material name="silver">
+        <color rgba="0.700 0.700 0.700 1.000"/>
     </material>
 
     <link name="base_link">
@@ -15,10 +15,11 @@
 
     <link name="body">
         <visual>
+            <origin rpy="0 0 0" xyz="0 0.02155 0"/>
             <geometry>
                 <box size="0.072 0.4831 0.1072"/>
             </geometry>
-            <origin rpy="0 0 0" xyz="0 0.02155 0"/>
+            <material name="silver"/>
         </visual>
     </link>
 
@@ -31,10 +32,11 @@
 
     <link name="Rtorso">
         <visual>
+            <origin rpy="1.57 0 0" xyz="0 0 0"/>
             <geometry>
                 <cylinder length="0.31" radius="0.05"/>
             </geometry>
-            <origin rpy="1.57 0 0" xyz="0 0 0"/>
+            <material name="silver"/>
         </visual>
     </link>
 
@@ -46,10 +48,11 @@
 
     <link name="Ltorso">
         <visual>
+            <origin rpy="1.57 0 0" xyz="0 0 0"/>
             <geometry>
                 <cylinder length="0.31" radius="0.05"/>
             </geometry>
-            <origin rpy="1.57 0 0" xyz="0 0 0"/>
+            <material name="silver"/>
         </visual>
     </link>    
 
@@ -64,10 +67,11 @@
 
     <link name="FRac">
         <visual>
+            <origin rpy="0 1.57 0" xyz="0.065 0 0"/>
             <geometry>
                 <cylinder length="0.13" radius="0.021"/>
             </geometry>
-            <origin rpy="0 1.57 0" xyz="0.065 0 0"/>
+            <material name="silver"/>
         </visual>
     </link>
 
@@ -82,8 +86,9 @@
         <visual>
             <origin rpy="-1.57 0.47 1.57" xyz="-0.07 -0.147 0.074"/>
             <geometry>
-		    <mesh filename="file://$(find padwq)/leg1_5.stl" scale="-0.001 0.001 0.001"/>
+                <mesh filename="file://$(find padwq)/leg1_5.stl" scale="-0.001 0.001 0.001"/>
             </geometry>
+            <material name="silver"/>
         </visual>
     </link>  
 
@@ -100,6 +105,7 @@
             <geometry>
                 <mesh filename="file://$(find padwq)/leg4.stl" scale="0.001 0.001 0.001"/>
             </geometry>
+            <material name="silver"/>
         </visual>
     </link>  
 
@@ -115,6 +121,7 @@
             <geometry>
                 <mesh filename="file://$(find padwq)/ball_leg4_1.stl" scale="0.001 0.001 0.001"/>
             </geometry>
+            <material name="silver"/>
         </visual>
     </link>
 
@@ -130,10 +137,11 @@
 
     <link name="BRac">
         <visual>
+            <origin rpy="0 1.57 0" xyz="0.065 0 0"/>
             <geometry>
                 <cylinder length="0.13" radius="0.021"/>
             </geometry>
-            <origin rpy="0 1.57 0" xyz="0.065 0 0"/>
+            <material name="silver"/>
         </visual>
     </link>
 
@@ -150,6 +158,7 @@
             <geometry>
                 <mesh filename="file://$(find padwq)/leg1_5.stl" scale="-0.001 0.001 0.001"/>
             </geometry>
+            <material name="silver"/>
         </visual>
     </link>  
 
@@ -166,6 +175,7 @@
             <geometry>
                 <mesh filename="file://$(find padwq)/leg4.stl" scale="0.001 0.001 0.001"/>
             </geometry>
+            <material name="silver"/>
         </visual>
     </link>  
 
@@ -181,6 +191,7 @@
             <geometry>
                 <mesh filename="file://$(find padwq)/ball_leg4_1.stl" scale="0.001 0.001 0.001"/>
             </geometry>
+            <material name="silver"/>
         </visual>
     </link>
 
@@ -195,10 +206,11 @@
 
     <link name="FLac">
         <visual>
+            <origin rpy="0 1.57 0" xyz="-0.065 0 0"/>
             <geometry>
                 <cylinder length="0.13" radius="0.021"/>
             </geometry>
-            <origin rpy="0 1.57 0" xyz="-0.065 0 0"/>
+            <material name="silver"/>
         </visual>
     </link>
 
@@ -215,6 +227,7 @@
             <geometry>
                 <mesh filename="file://$(find padwq)/leg1_5.stl" scale="0.001 0.001 0.001"/>
             </geometry>
+            <material name="silver"/>
         </visual>
     </link>  
 
@@ -231,6 +244,7 @@
             <geometry>
                 <mesh filename="file://$(find padwq)/leg4.stl" scale="0.001 0.001 0.001"/>
             </geometry>
+            <material name="silver"/>
         </visual>
     </link>  
 
@@ -246,6 +260,7 @@
             <geometry>
                 <mesh filename="file://$(find padwq)/ball_leg4_1.stl" scale="0.001 0.001 0.001"/>
             </geometry>
+            <material name="silver"/>
         </visual>
     </link> 
 
@@ -260,10 +275,11 @@
 
     <link name="BLac">
         <visual>
+            <origin rpy="0 1.57 0" xyz="-0.065 0 0"/>
             <geometry>
                 <cylinder length="0.13" radius="0.021"/>
             </geometry>
-            <origin rpy="0 1.57 0" xyz="-0.065 0 0"/>
+            <material name="silver"/>
         </visual>
     </link>
 
@@ -280,6 +296,7 @@
             <geometry>
                 <mesh filename="file://$(find padwq)/leg1_5.stl" scale="0.001 0.001 0.001"/>
             </geometry>
+            <material name="silver"/>
         </visual>
     </link>  
 
@@ -296,6 +313,7 @@
             <geometry>
                 <mesh filename="file://$(find padwq)/leg4.stl" scale="0.001 0.001 0.001"/>
             </geometry>
+            <material name="silver"/>
         </visual>
     </link>  
 
@@ -311,6 +329,7 @@
             <geometry>
                 <mesh filename="file://$(find padwq)/ball_leg4_1.stl" scale="0.001 0.001 0.001"/>
             </geometry>
+            <material name="silver"/>
         </visual>
     </link>   
 
