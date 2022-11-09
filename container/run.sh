@@ -48,9 +48,6 @@ elif [ $DISPLAY_SERVER == "wayland" ]; then
         --build-arg PARENT_IMAGE=$PARENT_IMAGE \
         --build-arg ROS_DISTRO=$ROS_DISTRO
 
-    # run it
-    # xhost +local:docker
-    # DISPLAY=:1.0
     $CONTAINER_ENGINE run -it \
                         -e XDG_RUNTIME_DIR=/tmp \
                         -e WAYLAND_DISPLAY=$WAYLAND_DISPLAY \
