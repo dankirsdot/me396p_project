@@ -1,0 +1,34 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100 #  Hz
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    joint_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    gazebo_joint_controller:
+      type: forward_command_controller/ForwardCommandController
+
+gazebo_joint_controller:
+  ros__parameters:
+    joints:
+      - fl_hip_roll
+      - fl_hip_pitch
+      - fl_knee_pitch
+      - fr_hip_roll
+      - fr_hip_pitch
+      - fr_knee_pitch
+      - rl_hip_roll
+      - rl_hip_pitch
+      - rl_knee_pitch
+      - rr_hip_roll
+      - rr_hip_pitch
+      - rr_knee_pitch
+    interface_name: position
+    command_interfaces:
+      - position 
+    state_interfaces:
+      - position
+      - velocity

@@ -1,6 +1,7 @@
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.actions import IncludeLaunchDescription
+from launch.actions import ExecuteProcess, RegisterEventHandler
 from launch.substitutions import PathJoinSubstitution
 from launch.substitutions import Command, LaunchConfiguration
 from launch.launch_description_sources import PythonLaunchDescriptionSource
@@ -27,9 +28,16 @@ def generate_launch_description():
         description='absolute path to the robot urdf file'
     )
 
+    use_sim_time_arg = DeclareLaunchArgument(
+            name='use_sim_time',
+            default_value='True',
+            description='use Gazebo simulation time if true'
+    )
+
     # initialize launch arguments
     prefix = LaunchConfiguration('prefix')
     robot_name = LaunchConfiguration('robot_name')
+    use_sim_time = LaunchConfiguration('use_sim_time')
     
     # define nodes
     robot_description = Command([
@@ -40,13 +48,13 @@ def generate_launch_description():
         "prefix:=",
         prefix,
     ])
-
+    
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
         parameters=[
             {'robot_description': robot_description},
-            {'use_sim_time': True}
+            {'use_sim_time': use_sim_time}
         ]
     )
 
@@ -67,10 +75,22 @@ def generate_launch_description():
             arguments=[
                 '-topic', 'robot_description',
                 '-entity', robot_name,
-                '-z', '2'
+                '-z', '0.5'
             ]
     )
 
+    joint_state_broadcaster_node = ExecuteProcess(
+            cmd=['ros2', 'control', 'load_controller',
+                '--set-state', 'start', 'joint_state_broadcaster'],
+        output='screen'
+    )
+    
+    gazebo_joint_controller_node = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller',
+            '--set-state', 'start', 'gazebo_joint_controller'],
+        output='screen'
+    )
+  
     controller_node = Node(
         package='padwq_bringup',
         executable='controller',
@@ -80,9 +100,12 @@ def generate_launch_description():
     ld = LaunchDescription([
         prefix_arg,
         robot_name_arg,
+        use_sim_time_arg,
         robot_state_publisher_node,
         gazebo_node,
         gazebo_spawn_node,
+        joint_state_broadcaster_node,
+        gazebo_joint_controller_node,
         controller_node
     ])
 

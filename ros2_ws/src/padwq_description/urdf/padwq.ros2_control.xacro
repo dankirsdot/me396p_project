@@ -10,79 +10,116 @@
 
             <joint name="${prefix}fl_hip_roll">
                 <command_interface name="position"/>
-                <state_interface name="position"/>
+                <state_interface name="position">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
                 <state_interface name="velocity"/>
+                <state_interface name="effort"/>
             </joint>
 
             <joint name="${prefix}fl_hip_pitch">
                 <command_interface name="position"/>
-                <state_interface name="position"/>
+                <state_interface name="position">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
                 <state_interface name="velocity"/>
+                <state_interface name="effort"/>
             </joint>
 
             <joint name="${prefix}fl_knee_pitch">
                 <command_interface name="position"/>
-                <state_interface name="position"/>
+                <state_interface name="position">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
                 <state_interface name="velocity"/>
+                <state_interface name="effort"/>
             </joint>
 
             <joint name="${prefix}fr_hip_roll">
                 <command_interface name="position"/>
-                <state_interface name="position"/>
+                <state_interface name="position">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
                 <state_interface name="velocity"/>
+                <state_interface name="effort"/>
             </joint>
 
             <joint name="${prefix}fr_hip_pitch">
                 <command_interface name="position"/>
-                <state_interface name="position"/>
+                <state_interface name="position">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
                 <state_interface name="velocity"/>
+                <state_interface name="effort"/>
             </joint>
 
             <joint name="${prefix}fr_knee_pitch">
                 <command_interface name="position"/>
-                <state_interface name="position"/>
+                <state_interface name="position">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
                 <state_interface name="velocity"/>
+                <state_interface name="effort"/>
             </joint>
+            
             <joint name="${prefix}rl_hip_roll">
                 <command_interface name="position"/>
-                <state_interface name="position"/>
+                <state_interface name="position">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
                 <state_interface name="velocity"/>
+                <state_interface name="effort"/>
             </joint>
 
             <joint name="${prefix}rl_hip_pitch">
                 <command_interface name="position"/>
-                <state_interface name="position"/>
+                <state_interface name="position">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
                 <state_interface name="velocity"/>
+                <state_interface name="effort"/>
             </joint>
 
             <joint name="${prefix}rl_knee_pitch">
                 <command_interface name="position"/>
-                <state_interface name="position"/>
+                <state_interface name="position">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
                 <state_interface name="velocity"/>
+                <state_interface name="effort"/>
             </joint>
 
             <joint name="${prefix}rr_hip_roll">
                 <command_interface name="position"/>
-                <state_interface name="position"/>
+                <state_interface name="position">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
                 <state_interface name="velocity"/>
+                <state_interface name="effort"/>
             </joint>
 
             <joint name="${prefix}rr_hip_pitch">
                 <command_interface name="position"/>
-                <state_interface name="position"/>
+                <state_interface name="position">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
                 <state_interface name="velocity"/>
+                <state_interface name="effort"/>
             </joint>
 
             <joint name="${prefix}rr_knee_pitch">
                 <command_interface name="position"/>
-                <state_interface name="position"/>
+                <state_interface name="position">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
                 <state_interface name="velocity"/>
+                <state_interface name="effort"/>
             </joint>
         </ros2_control>
 
         <gazebo>
             <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-                <parameters>$(find padwq_bringup)/config/padwq_controllers.yaml</parameters>
+                <parameters>$(find padwq_description)/config/controllers.yaml</parameters>
             </plugin>
         </gazebo>
 

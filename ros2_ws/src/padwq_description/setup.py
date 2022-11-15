@@ -16,7 +16,6 @@ setup(
         (os.path.join('share', package_name, 'urdf'), glob('urdf/*')),
         (os.path.join('share', package_name, 'meshes'), glob('meshes/*')),
         (os.path.join('share', package_name, 'config'), glob('config/*')),
-        (os.path.join('share', package_name, 'ros2_control'), glob('ros2_control/*'))
     ],
     install_requires=['setuptools'],
     zip_safe=True,

@@ -1,25 +1,33 @@
 import rclpy
 from rclpy.node import Node
 
-from std_msgs.msg import String
-
+import numpy as np
+from std_msgs.msg import Float64MultiArray
+from std_msgs.msg import Float32MultiArray
 
 class padwqController(Node):
 
     def __init__(self):
         super().__init__('padwq_controller')
-        self.publisher_ = self.create_publisher(String, 'padwq_controller', 10)
-        timer_period = 0.5  # seconds
-        self.timer = self.create_timer(timer_period, self.timer_callback)
-        self.i = 0
 
-    def timer_callback(self):
-        msg = String()
-        msg.data = 'Hello from padwq controller: %d' % self.i
-        self.publisher_.publish(msg)
-        self.get_logger().info('Publishing: "%s"' % msg.data)
-        self.i += 1
+        self.joint_angs = Float64MultiArray()
+        self.rx_data = []
+        self.prev_joint_angs = None
 
+        # self.sub = self.create_subscription(Float32MultiArray, 'padwq_joint_controller/commands', self.sub_callback, 30)
+        self.pub = self.create_publisher(Float64MultiArray, 'gazebo_joint_controller/commands', 30)
+        timer_period = 0.01
+        self.timerPub = self.create_timer(timer_period, self.pub_callback)
+
+    def sub_callback(self, msg):
+        self.rx_data = []
+        for data in msg.data:
+            self.rx_data.append(data * np.pi/180)
+        self.joint_angs.data = self.rx_data
+        self.pub_.publish(self.joint_angs)
+
+    def pub_callback(self):
+        pass
 
 def main(args=None):
     rclpy.init(args=args)
