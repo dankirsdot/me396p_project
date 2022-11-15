@@ -12,7 +12,7 @@
         <xacro:property name="connector_l" value="0.019"/>
 
         <link name="${prefix}base_link">
-            <xacro:inertia_box mass="12" x="0.283" y="0.180" z="0.108">
+            <xacro:inertia_box mass="5.62" x="0.283" y="0.180" z="0.108">
                 <origin xyz="0 0 0" rpy="0 0 0"/>
             </xacro:inertia_box>
             <visual>
@@ -39,7 +39,7 @@
         </joint>
 
         <link name="${prefix}fl_hip_roll_actuator">
-            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+            <xacro:inertia_cylinder mass="0.62" length="${rdm_l}" radius="${rdm_r}">
                 <origin rpy="0 0 0" xyz="0 0 -${rdm_l/2}"/>
             </xacro:inertia_cylinder>
             <visual>
@@ -93,7 +93,7 @@
         </joint>
 
         <link name="${prefix}fl_hip_pitch_actuator">
-            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+            <xacro:inertia_cylinder mass="0.62" length="${rdm_l}" radius="${rdm_r}">
                 <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
             </xacro:inertia_cylinder>
             <visual>
@@ -143,7 +143,7 @@
         </joint>
 
         <link name="${prefix}fl_knee_pitch_actuator">
-            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+            <xacro:inertia_cylinder mass="0.62" length="${rdm_l}" radius="${rdm_r}">
                 <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
             </xacro:inertia_cylinder>
             <visual>
@@ -168,7 +168,7 @@
         </joint>
 
         <link name="${prefix}fl_upper_link">
-            <xacro:inertia_box mass="0.3" x="0.22" y="0.04" z="0.04">
+            <xacro:inertia_box mass="0.2" x="0.22" y="0.04" z="0.04">
                 <origin rpy="0 0 0" xyz="0.11 0 0"/>
             </xacro:inertia_box>
             <visual>
@@ -195,7 +195,7 @@
         </joint>
 
         <link name="${prefix}fl_under_link">
-            <xacro:inertia_box mass="0.3" x="0.22" y="0.04" z="0.04">
+            <xacro:inertia_box mass="0.08" x="0.22" y="0.04" z="0.04">
                 <origin rpy="0 0 0" xyz="0.11 0 0"/>
             </xacro:inertia_box>
             <visual>
@@ -247,7 +247,7 @@
         </joint>
 
         <link name="${prefix}fr_hip_roll_actuator">
-            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+            <xacro:inertia_cylinder mass="0.62" length="${rdm_l}" radius="${rdm_r}">
                 <origin rpy="0 0 0" xyz="0 0 ${-rdm_l/2}"/>
             </xacro:inertia_cylinder>
             <visual>
@@ -301,7 +301,7 @@
         </joint>
 
         <link name="${prefix}fr_hip_pitch_actuator">
-            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+            <xacro:inertia_cylinder mass="0.62" length="${rdm_l}" radius="${rdm_r}">
                 <origin rpy="0 0 0" xyz="0 0 -${rdm_l/2}"/>
             </xacro:inertia_cylinder>
             <visual>
@@ -351,7 +351,7 @@
         </joint>
 
         <link name="${prefix}fr_knee_pitch_actuator">
-            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+            <xacro:inertia_cylinder mass="0.62" length="${rdm_l}" radius="${rdm_r}">
                 <origin rpy="0 0 0" xyz="0 0 -${rdm_l/2}"/>
             </xacro:inertia_cylinder>
             <visual>
@@ -376,7 +376,7 @@
         </joint>
 
         <link name="${prefix}fr_upper_link">
-            <xacro:inertia_box mass="0.3" x="0.22" y="0.04" z="0.04">
+            <xacro:inertia_box mass="0.2" x="0.22" y="0.04" z="0.04">
                 <origin rpy="0 0 0" xyz="0.11 0 0"/>
             </xacro:inertia_box>
             <visual>
@@ -403,7 +403,7 @@
         </joint>
 
         <link name="${prefix}fr_under_link">
-            <xacro:inertia_box mass="0.3" x="0.22" y="0.04" z="0.04">
+            <xacro:inertia_box mass="0.08" x="0.22" y="0.04" z="0.04">
                 <origin rpy="0 0 0" xyz="0.11 0 0"/>
             </xacro:inertia_box>
             <visual>
@@ -455,7 +455,7 @@
         </joint>
 
         <link name="${prefix}rl_hip_roll_actuator">
-            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+            <xacro:inertia_cylinder mass="0.62" length="${rdm_l}" radius="${rdm_r}">
                 <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
             </xacro:inertia_cylinder>
             <visual>
@@ -509,7 +509,7 @@
         </joint>
 
         <link name="${prefix}rl_hip_pitch_actuator">
-            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+            <xacro:inertia_cylinder mass="0.62" length="${rdm_l}" radius="${rdm_r}">
                 <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
             </xacro:inertia_cylinder>
             <visual>
@@ -559,7 +559,7 @@
         </joint>
 
         <link name="${prefix}rl_knee_pitch_actuator">
-            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+            <xacro:inertia_cylinder mass="0.62" length="${rdm_l}" radius="${rdm_r}">
                 <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
             </xacro:inertia_cylinder>
             <visual>
@@ -584,7 +584,7 @@
         </joint>
 
         <link name="${prefix}rl_upper_link">
-            <xacro:inertia_box mass="0.3" x="0.22" y="0.04" z="0.04">
+            <xacro:inertia_box mass="0.2" x="0.22" y="0.04" z="0.04">
                 <origin rpy="0 0 0" xyz="0.11 0 0"/>
             </xacro:inertia_box>
             <visual>
@@ -611,7 +611,7 @@
         </joint>
 
         <link name="${prefix}rl_under_link">
-            <xacro:inertia_box mass="0.3" x="0.22" y="0.04" z="0.04">
+            <xacro:inertia_box mass="0.08" x="0.22" y="0.04" z="0.04">
                 <origin rpy="0 0 0" xyz="0.11 0 0"/>
             </xacro:inertia_box>
             <visual>
@@ -663,7 +663,7 @@
         </joint>
 
         <link name="${prefix}rr_hip_roll_actuator">
-            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+            <xacro:inertia_cylinder mass="0.62" length="${rdm_l}" radius="${rdm_r}">
                 <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
             </xacro:inertia_cylinder>
             <visual>
@@ -717,7 +717,7 @@
         </joint>
 
         <link name="${prefix}rr_hip_pitch_actuator">
-            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+            <xacro:inertia_cylinder mass="0.62" length="${rdm_l}" radius="${rdm_r}">
                 <origin rpy="0 0 0" xyz="0 0 -${rdm_l/2}"/>
             </xacro:inertia_cylinder>
             <visual>
@@ -767,7 +767,7 @@
         </joint>
 
         <link name="${prefix}rr_knee_pitch_actuator">
-            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+            <xacro:inertia_cylinder mass="0.62" length="${rdm_l}" radius="${rdm_r}">
                 <origin rpy="0 0 0" xyz="0 0 -${rdm_l/2}"/>
             </xacro:inertia_cylinder>
             <visual>
@@ -792,7 +792,7 @@
         </joint>
 
         <link name="${prefix}rr_upper_link">
-            <xacro:inertia_box mass="0.3" x="0.22" y="0.04" z="0.04">
+            <xacro:inertia_box mass="0.2" x="0.22" y="0.04" z="0.04">
                 <origin rpy="0 0 0" xyz="0.11 0 0"/>
             </xacro:inertia_box>
             <visual>
@@ -820,7 +820,7 @@
         </joint>
 
         <link name="${prefix}rr_under_link">
-            <xacro:inertia_box mass="0.3" x="0.22" y="0.04" z="0.04">
+            <xacro:inertia_box mass="0.08" x="0.22" y="0.04" z="0.04">
                 <origin rpy="0 0 0" xyz="0.11 0 0"/>
             </xacro:inertia_box>
             <visual>
