@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="gazebo" params="prefix">
+
+        <gazebo reference="${prefix}base_link">
+            <material>Gazebo/White</material>
+        </gazebo>
+
+        <gazebo reference="${prefix}fl_hip_roll_actuator">
+            <material>Gazebo/Black</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}fl_hip_pitch_connector">
+            <material>Gazebo/White</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}fl_hip_pitch_actuator">
+            <material>Gazebo/Black</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}fl_knee_pitch_connector">
+            <material>Gazebo/White</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}fl_knee_pitch_actuator">
+            <material>Gazebo/Black</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}fl_upper_link">
+            <material>Gazebo/White</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}fl_under_link">
+            <material>Gazebo/White</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}fl_foot">
+            <material>Gazebo/Black</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}fr_hip_roll_actuator">
+            <material>Gazebo/Black</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}fr_hip_pitch_connector">
+            <material>Gazebo/White</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}fr_hip_pitch_actuator">
+            <material>Gazebo/Black</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}fr_knee_pitch_connector">
+            <material>Gazebo/White</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}fr_knee_pitch_actuator">
+            <material>Gazebo/Black</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}fr_upper_link">
+            <material>Gazebo/White</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}fr_under_link">
+            <material>Gazebo/White</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}fr_foot">
+            <material>Gazebo/Black</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}rl_hip_roll_actuator">
+            <material>Gazebo/Black</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}rl_hip_pitch_connector">
+            <material>Gazebo/White</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}rl_hip_pitch_actuator">
+            <material>Gazebo/Black</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}rl_knee_pitch_connector">
+            <material>Gazebo/White</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}rl_knee_pitch_actuator">
+            <material>Gazebo/Black</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}rl_upper_link">
+            <material>Gazebo/White</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}rl_under_link">
+            <material>Gazebo/White</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}rl_foot">
+            <material>Gazebo/Black</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}rr_hip_roll_actuator">
+            <material>Gazebo/Black</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}rr_hip_pitch_connector">
+            <material>Gazebo/White</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}rr_hip_pitch_actuator">
+            <material>Gazebo/Black</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}rr_knee_pitch_connector">
+            <material>Gazebo/White</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}rr_knee_pitch_actuator">
+            <material>Gazebo/Black</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}rr_upper_link">
+            <material>Gazebo/White</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}rr_under_link">
+            <material>Gazebo/White</material>
+        </gazebo>
+        
+        <gazebo reference="${prefix}rr_foot">
+            <material>Gazebo/Black</material>
+        </gazebo>
+    
+    </xacro:macro>
+
+</robot>

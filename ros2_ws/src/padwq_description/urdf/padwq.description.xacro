@@ -1,0 +1,866 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="padwq" params="prefix">
+
+        <xacro:include filename="$(find padwq_description)/urdf/inertia.xacro"/>
+
+        <xacro:property name="deg2rad" value="${pi/180}"/>
+
+        <xacro:property name="rdm_l" value="0.043"/>
+        <xacro:property name="rdm_r" value="0.049"/>
+        <xacro:property name="connector_l" value="0.019"/>
+
+        <link name="${prefix}base_link">
+            <xacro:inertia_box mass="12" x="0.283" y="0.180" z="0.108">
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+            </xacro:inertia_box>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <box size="0.283 0.180 0.108"/>
+                </geometry>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <box size="0.283 0.180 0.108"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <!-- front left -->
+        <joint name="${prefix}fl_base_to_hip" type="fixed">
+            <axis xyz="0 0 0"/>
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}fl_hip_roll_actuator"/>
+            <origin rpy="0 ${pi/2} 0" xyz="0.1415 0.07 0"/>
+        </joint>
+
+        <link name="${prefix}fl_hip_roll_actuator">
+            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+                <origin rpy="0 0 0" xyz="0 0 -${rdm_l/2}"/>
+            </xacro:inertia_cylinder>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 -${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 -${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}fl_hip_roll" type="revolute">
+            <axis xyz="0 0 1"/>
+            <parent link="${prefix}fl_hip_roll_actuator"/>
+            <child link="${prefix}fl_hip_pitch_connector"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <limit effort="1000.0" lower="${-30 * deg2rad}" upper="${30 * deg2rad}" velocity="0.7"/>
+        </joint>
+
+        <link name="${prefix}fl_hip_pitch_connector">
+            <xacro:inertia_box mass="1" x="${rdm_l}" y="${rdm_l}" z="${connector_l}">
+                <origin rpy="0 0 0" xyz="0 0 ${connector_l/2}"/>
+            </xacro:inertia_box>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 ${connector_l/2}"/>
+                <geometry>
+                    <box size="${rdm_l} ${rdm_l} ${connector_l}"/>
+                </geometry>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 ${connector_l/2}"/>
+                <geometry>
+                    <box size="${rdm_l} ${rdm_l} ${connector_l}"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}fl_hip_pitch" type="revolute">
+            <axis xyz="0 0 1"/>
+            <parent link="${prefix}fl_hip_pitch_connector"/>
+            <child link="${prefix}fl_hip_pitch_actuator"/>
+            <origin rpy="${pi/2} 0 0" xyz="0 ${rdm_l/2} 0.068"/>
+            <limit effort="1000.0" lower="${-51 * deg2rad}" upper="${93 * deg2rad}" velocity="0.7"/>
+        </joint>
+
+        <link name="${prefix}fl_hip_pitch_actuator">
+            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+                <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
+            </xacro:inertia_cylinder>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}fl_hip_to_knee" type="fixed">
+            <parent link="${prefix}fl_hip_pitch_actuator"/>
+            <child link="${prefix}fl_knee_pitch_connector"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </joint>
+
+        <link name="${prefix}fl_knee_pitch_connector">
+            <xacro:inertia_cylinder mass="1" length="${connector_l}" radius="0.03">
+                <origin rpy="0 0 0" xyz="0 0 -${connector_l/2}"/>
+            </xacro:inertia_cylinder>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 -${connector_l/2}"/>
+                <geometry>
+                    <cylinder length="${connector_l}" radius="0.03"/>
+                </geometry>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 -${connector_l/2}"/>
+                <geometry>
+                    <cylinder length="${connector_l}" radius="0.03"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}fl_knee_connector_to_actuator" type="fixed">
+            <parent link="${prefix}fl_knee_pitch_connector"/>
+            <child link="${prefix}fl_knee_pitch_actuator"/>
+            <origin rpy="0 0 0" xyz="0 0 -0.062"/>
+        </joint>
+
+        <link name="${prefix}fl_knee_pitch_actuator">
+            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+                <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
+            </xacro:inertia_cylinder>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}fl_knee_pitch_actuator_to_upper_link" type="fixed">
+            <parent link="${prefix}fl_knee_pitch_actuator"/>
+            <child link="${prefix}fl_upper_link"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </joint>
+
+        <link name="${prefix}fl_upper_link">
+            <xacro:inertia_box mass="0.3" x="0.22" y="0.04" z="0.04">
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+            </xacro:inertia_box>
+            <visual>
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+                <geometry>
+                    <box size="0.22 0.04 0.04"/>
+                </geometry>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+                <geometry>
+                    <box size="0.22 0.04 0.04"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}fl_knee_pitch" type="revolute">
+            <axis xyz="0 0 1"/>
+            <parent link="${prefix}fl_upper_link"/>
+            <child link="${prefix}fl_under_link"/>
+            <origin rpy="0 0 0" xyz="0.22 0 0"/>
+            <limit effort="1000.0" lower="${-134 * deg2rad}" upper="${-7 * deg2rad}" velocity="0.7"/>
+        </joint>
+
+        <link name="${prefix}fl_under_link">
+            <xacro:inertia_box mass="0.3" x="0.22" y="0.04" z="0.04">
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+            </xacro:inertia_box>
+            <visual>
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+                <geometry>
+                    <box size="0.22 0.04 0.04"/>
+                </geometry>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+                <geometry>
+                    <box size="0.22 0.04 0.04"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}fl_foot" type="fixed">
+            <axis xyz="0 1 0"/>
+            <parent link="${prefix}fl_under_link"/>
+            <child link="${prefix}fl_foot"/>
+            <origin rpy="0 0 0" xyz="0.22 0 0"/>
+        </joint>
+
+        <link name="${prefix}fl_foot">
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <sphere radius="0.025"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <sphere radius="0.025"/>
+                </geometry>
+            </collision>
+        </link>
+
+
+        <!-- front right -->
+
+        <joint name="${prefix}fr_base_to_hip" type="fixed">
+            <axis xyz="0 0 0"/>
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}fr_hip_roll_actuator"/>
+            <origin rpy="0 ${pi/2} 0" xyz="0.1415 -0.07 0"/>
+        </joint>
+
+        <link name="${prefix}fr_hip_roll_actuator">
+            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+                <origin rpy="0 0 0" xyz="0 0 ${-rdm_l/2}"/>
+            </xacro:inertia_cylinder>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 ${-rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 ${-rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}fr_hip_roll" type="revolute">
+            <axis xyz="0 0 1"/>
+            <parent link="${prefix}fr_hip_roll_actuator"/>
+            <child link="${prefix}fr_hip_pitch_connector"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <limit effort="1000.0" lower="${-30 * deg2rad}" upper="${30 * deg2rad}" velocity="0.7"/>
+        </joint>
+
+        <link name="${prefix}fr_hip_pitch_connector">
+            <xacro:inertia_box mass="1" x="${rdm_l}" y="${rdm_l}" z="${connector_l}">
+                <origin rpy="0 0 0" xyz="0 0 ${connector_l/2}"/>
+            </xacro:inertia_box>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 ${connector_l/2}"/>
+                <geometry>
+                    <box size="${rdm_l} ${rdm_l} ${connector_l}"/>
+                </geometry>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 ${connector_l/2}"/>
+                <geometry>
+                    <box size="${rdm_l} ${rdm_l} ${connector_l}"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}fr_hip_pitch" type="revolute">
+            <axis xyz="0 0 1"/>
+            <parent link="${prefix}fr_hip_pitch_connector"/>
+            <child link="${prefix}fr_hip_pitch_actuator"/>
+            <origin rpy="${pi/2} 0 0" xyz="0 -${rdm_l/2} 0.068"/>
+            <limit effort="1000.0" lower="${-51 * deg2rad}" upper="${93 * deg2rad}" velocity="0.7"/>
+        </joint>
+
+        <link name="${prefix}fr_hip_pitch_actuator">
+            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+                <origin rpy="0 0 0" xyz="0 0 -${rdm_l/2}"/>
+            </xacro:inertia_cylinder>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 -${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 -${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}fr_hip_to_knee" type="fixed">
+            <parent link="${prefix}fr_hip_pitch_actuator"/>
+            <child link="${prefix}fr_knee_pitch_connector"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </joint>
+
+        <link name="${prefix}fr_knee_pitch_connector">
+            <xacro:inertia_cylinder mass="1" length="${connector_l}" radius="0.03">
+                <origin rpy="0 0 0" xyz="0 0 ${connector_l/2}"/>
+            </xacro:inertia_cylinder>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 ${connector_l/2}"/>
+                <geometry>
+                    <cylinder length="${connector_l}" radius="0.03"/>
+                </geometry>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 ${connector_l/2}"/>
+                <geometry>
+                    <cylinder length="${connector_l}" radius="0.03"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}fr_knee_connector_to_actuator" type="fixed">
+            <parent link="${prefix}fr_knee_pitch_connector"/>
+            <child link="${prefix}fr_knee_pitch_actuator"/>
+            <origin rpy="0 0 0" xyz="0 0 0.062"/>
+        </joint>
+
+        <link name="${prefix}fr_knee_pitch_actuator">
+            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+                <origin rpy="0 0 0" xyz="0 0 -${rdm_l/2}"/>
+            </xacro:inertia_cylinder>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 -${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 -${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}fr_knee_pitch_actuator_to_upper_link" type="fixed">
+            <parent link="${prefix}fr_knee_pitch_actuator"/>
+            <child link="${prefix}fr_upper_link"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </joint>
+
+        <link name="${prefix}fr_upper_link">
+            <xacro:inertia_box mass="0.3" x="0.22" y="0.04" z="0.04">
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+            </xacro:inertia_box>
+            <visual>
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+                <geometry>
+                    <box size="0.22 0.04 0.04"/>
+                </geometry>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+                <geometry>
+                    <box size="0.22 0.04 0.04"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}fr_knee_pitch" type="revolute">
+            <axis xyz="0 0 1"/>
+            <parent link="${prefix}fr_upper_link"/>
+            <child link="${prefix}fr_under_link"/>
+            <origin rpy="0 0 0" xyz="0.22 0 0"/>
+            <limit effort="1000.0" lower="${-134 * deg2rad}" upper="${-7 * deg2rad}" velocity="0.7"/>
+        </joint>
+
+        <link name="${prefix}fr_under_link">
+            <xacro:inertia_box mass="0.3" x="0.22" y="0.04" z="0.04">
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+            </xacro:inertia_box>
+            <visual>
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+                <geometry>
+                    <box size="0.22 0.04 0.04"/>
+                </geometry>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+                <geometry>
+                    <box size="0.22 0.04 0.04"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}fr_foot" type="fixed">
+            <axis xyz="0 1 0"/>
+            <parent link="${prefix}fr_under_link"/>
+            <child link="${prefix}fr_foot"/>
+            <origin rpy="0 0 0" xyz="0.22 0 0"/>
+        </joint>
+
+        <link name="${prefix}fr_foot">
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <sphere radius="0.025"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <sphere radius="0.025"/>
+                </geometry>
+            </collision>
+        </link>
+
+
+        <!-- rear left -->
+
+        <joint name="${prefix}rl_base_to_hip" type="fixed">
+            <axis xyz="0 0 0"/>
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}rl_hip_roll_actuator"/>
+            <origin rpy="0 ${pi/2} 0" xyz="-0.1415 0.07 0"/>
+        </joint>
+
+        <link name="${prefix}rl_hip_roll_actuator">
+            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+                <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
+            </xacro:inertia_cylinder>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}rl_hip_roll" type="revolute">
+            <axis xyz="0 0 1"/>
+            <parent link="${prefix}rl_hip_roll_actuator"/>
+            <child link="${prefix}rl_hip_pitch_connector"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <limit effort="1000.0" lower="${-30 * deg2rad}" upper="${30 * deg2rad}" velocity="0.7"/>
+        </joint>
+
+        <link name="${prefix}rl_hip_pitch_connector">
+            <xacro:inertia_box mass="1" x="${rdm_l}" y="${rdm_l}" z="${connector_l}">
+                <origin rpy="0 0 0" xyz="0 0 -${connector_l/2}"/>
+            </xacro:inertia_box>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 -${connector_l/2}"/>
+                <geometry>
+                    <box size="${rdm_l} ${rdm_l} ${connector_l}"/>
+                </geometry>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 -${connector_l/2}"/>
+                <geometry>
+                    <box size="${rdm_l} ${rdm_l} ${connector_l}"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}rl_hip_pitch" type="revolute">
+            <axis xyz="0 0 1"/>
+            <parent link="${prefix}rl_hip_pitch_connector"/>
+            <child link="${prefix}rl_hip_pitch_actuator"/>
+            <origin rpy="${pi/2} 0 0" xyz="0 ${rdm_l/2} -0.068"/>
+            <limit effort="1000.0" lower="${-51 * deg2rad}" upper="${93 * deg2rad}" velocity="0.7"/>
+        </joint>
+
+        <link name="${prefix}rl_hip_pitch_actuator">
+            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+                <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
+            </xacro:inertia_cylinder>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}rl_hip_to_knee" type="fixed">
+            <parent link="${prefix}rl_hip_pitch_actuator"/>
+            <child link="${prefix}rl_knee_pitch_connector"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </joint>
+
+        <link name="${prefix}rl_knee_pitch_connector">
+            <xacro:inertia_cylinder mass="1" length="${connector_l}" radius="0.03">
+                <origin rpy="0 0 0" xyz="0 0 -${connector_l/2}"/>
+            </xacro:inertia_cylinder>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 -${connector_l/2}"/>
+                <geometry>
+                    <cylinder length="${connector_l}" radius="0.03"/>
+                </geometry>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 -${connector_l/2}"/>
+                <geometry>
+                    <cylinder length="${connector_l}" radius="0.03"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}rl_knee_connector_to_actuator" type="fixed">
+            <parent link="${prefix}rl_knee_pitch_connector"/>
+            <child link="${prefix}rl_knee_pitch_actuator"/>
+            <origin rpy="0 0 0" xyz="0 0 -0.062"/>
+        </joint>
+
+        <link name="${prefix}rl_knee_pitch_actuator">
+            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+                <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
+            </xacro:inertia_cylinder>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}rl_knee_pitch_actuator_to_upper_link" type="fixed">
+            <parent link="${prefix}rl_knee_pitch_actuator"/>
+            <child link="${prefix}rl_upper_link"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </joint>
+
+        <link name="${prefix}rl_upper_link">
+            <xacro:inertia_box mass="0.3" x="0.22" y="0.04" z="0.04">
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+            </xacro:inertia_box>
+            <visual>
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+                <geometry>
+                    <box size="0.22 0.04 0.04"/>
+                </geometry>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+                <geometry>
+                    <box size="0.22 0.04 0.04"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}rl_knee_pitch" type="revolute">
+            <axis xyz="0 0 1"/>
+            <parent link="${prefix}rl_upper_link"/>
+            <child link="${prefix}rl_under_link"/>
+            <origin rpy="0 0 0" xyz="0.22 0 0"/>
+            <limit effort="1000.0" lower="${-134 * deg2rad}" upper="${-7 * deg2rad}" velocity="0.7"/>
+        </joint>
+
+        <link name="${prefix}rl_under_link">
+            <xacro:inertia_box mass="0.3" x="0.22" y="0.04" z="0.04">
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+            </xacro:inertia_box>
+            <visual>
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+                <geometry>
+                    <box size="0.22 0.04 0.04"/>
+                </geometry>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+                <geometry>
+                    <box size="0.22 0.04 0.04"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}rl_foot" type="fixed">
+            <axis xyz="0 1 0"/>
+            <parent link="${prefix}rl_under_link"/>
+            <child link="${prefix}rl_foot"/>
+            <origin rpy="0 0 0" xyz="0.22 0 0"/>
+        </joint>
+
+        <link name="${prefix}rl_foot">
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <sphere radius="0.025"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <sphere radius="0.025"/>
+                </geometry>
+            </collision>
+        </link>
+
+
+        <!-- rear right -->
+
+        <joint name="${prefix}rr_base_to_hip" type="fixed">
+            <axis xyz="0 0 0"/>
+            <parent link="${prefix}base_link"/>
+            <child link="${prefix}rr_hip_roll_actuator"/>
+            <origin rpy="0 ${pi/2} 0" xyz="-0.1415 -0.07 0"/>
+        </joint>
+
+        <link name="${prefix}rr_hip_roll_actuator">
+            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+                <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
+            </xacro:inertia_cylinder>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 ${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}rr_hip_roll" type="revolute">
+            <axis xyz="0 0 1"/>
+            <parent link="${prefix}rr_hip_roll_actuator"/>
+            <child link="${prefix}rr_hip_pitch_connector"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <limit effort="1000.0" lower="${-30 * deg2rad}" upper="${30 * deg2rad}" velocity="0.7"/>
+        </joint>
+
+        <link name="${prefix}rr_hip_pitch_connector">
+            <xacro:inertia_box mass="1" x="${rdm_l}" y="${rdm_l}" z="${connector_l}">
+                <origin rpy="0 0 0" xyz="0 0 -${connector_l/2}"/>
+            </xacro:inertia_box>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 -${connector_l/2}"/>
+                <geometry>
+                    <box size="${rdm_l} ${rdm_l} ${connector_l}"/>
+                </geometry>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 -${connector_l/2}"/>
+                <geometry>
+                    <box size="${rdm_l} ${rdm_l} ${connector_l}"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}rr_hip_pitch" type="revolute">
+            <axis xyz="0 0 1"/>
+            <parent link="${prefix}rr_hip_pitch_connector"/>
+            <child link="${prefix}rr_hip_pitch_actuator"/>
+            <origin rpy="${pi/2} 0 0" xyz="0 -${rdm_l/2} -0.068"/>
+            <limit effort="1000.0" lower="${-51 * deg2rad}" upper="${93 * deg2rad}" velocity="0.7"/>
+        </joint>
+
+        <link name="${prefix}rr_hip_pitch_actuator">
+            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+                <origin rpy="0 0 0" xyz="0 0 -${rdm_l/2}"/>
+            </xacro:inertia_cylinder>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 -${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 -${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}rr_hip_to_knee" type="fixed">
+            <parent link="${prefix}rr_hip_pitch_actuator"/>
+            <child link="${prefix}rr_knee_pitch_connector"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </joint>
+
+        <link name="${prefix}rr_knee_pitch_connector">
+            <xacro:inertia_cylinder mass="1" length="${connector_l}" radius="0.03">
+                <origin rpy="0 0 0" xyz="0 0 ${connector_l/2}"/>
+            </xacro:inertia_cylinder>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 ${connector_l/2}"/>
+                <geometry>
+                    <cylinder length="${connector_l}" radius="0.03"/>
+                </geometry>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 ${connector_l/2}"/>
+                <geometry>
+                    <cylinder length="${connector_l}" radius="0.03"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}rr_knee_connector_to_actuator" type="fixed">
+            <parent link="${prefix}rr_knee_pitch_connector"/>
+            <child link="${prefix}rr_knee_pitch_actuator"/>
+            <origin rpy="0 0 0" xyz="0 0 0.062"/>
+        </joint>
+
+        <link name="${prefix}rr_knee_pitch_actuator">
+            <xacro:inertia_cylinder mass="1" length="${rdm_l}" radius="${rdm_r}">
+                <origin rpy="0 0 0" xyz="0 0 -${rdm_l/2}"/>
+            </xacro:inertia_cylinder>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 -${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 -${rdm_l/2}"/>
+                <geometry>
+                    <cylinder length="${rdm_l}" radius="${rdm_r}"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}rr_knee_pitch_actuator_to_upper_link" type="fixed">
+            <parent link="${prefix}rr_knee_pitch_actuator"/>
+            <child link="${prefix}rr_upper_link"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </joint>
+
+        <link name="${prefix}rr_upper_link">
+            <xacro:inertia_box mass="0.3" x="0.22" y="0.04" z="0.04">
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+            </xacro:inertia_box>
+            <visual>
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+                <geometry>
+                    <box size="0.22 0.04 0.04"/>
+                    <!-- <mesh filename="file://$(find padwq_description)/meshes/leg1_5.stl" scale="0.001 0.001 -0.001"/> -->
+                </geometry>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+                <geometry>
+                    <box size="0.22 0.04 0.04"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}rr_knee_pitch" type="revolute">
+            <axis xyz="0 0 1"/>
+            <parent link="${prefix}rr_upper_link"/>
+            <child link="${prefix}rr_under_link"/>
+            <origin rpy="0 0 0" xyz="0.22 0 0"/>
+            <limit effort="1000.0" lower="${-134 * deg2rad}" upper="${-7 * deg2rad}" velocity="0.7"/>
+        </joint>
+
+        <link name="${prefix}rr_under_link">
+            <xacro:inertia_box mass="0.3" x="0.22" y="0.04" z="0.04">
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+            </xacro:inertia_box>
+            <visual>
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+                <geometry>
+                    <box size="0.22 0.04 0.04"/>
+                </geometry>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0.11 0 0"/>
+                <geometry>
+                    <box size="0.22 0.04 0.04"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}rr_foot" type="fixed">
+            <axis xyz="0 1 0"/>
+            <parent link="${prefix}rr_under_link"/>
+            <child link="${prefix}rr_foot"/>
+            <origin rpy="0 0 0" xyz="0.22 0 0"/>
+        </joint>
+
+        <link name="${prefix}rr_foot">
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <sphere radius="0.025"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <sphere radius="0.025"/>
+                </geometry>
+            </collision>
+        </link>
+
+    </xacro:macro>
+
+</robot>
