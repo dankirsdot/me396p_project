@@ -36,6 +36,7 @@
             <parent link="${prefix}base_link"/>
             <child link="${prefix}fl_hip_roll_actuator"/>
             <origin rpy="0 ${pi/2} 0" xyz="0.1415 0.07 0"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}fl_hip_roll_actuator">
@@ -63,6 +64,7 @@
             <child link="${prefix}fl_hip_pitch_connector"/>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <limit effort="1000.0" lower="${-30 * deg2rad}" upper="${30 * deg2rad}" velocity="0.7"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}fl_hip_pitch_connector">
@@ -90,6 +92,7 @@
             <child link="${prefix}fl_hip_pitch_actuator"/>
             <origin rpy="${pi/2} 0 0" xyz="0 ${rdm_l/2} 0.068"/>
             <limit effort="1000.0" lower="${-51 * deg2rad}" upper="${93 * deg2rad}" velocity="0.7"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}fl_hip_pitch_actuator">
@@ -115,6 +118,7 @@
             <parent link="${prefix}fl_hip_pitch_actuator"/>
             <child link="${prefix}fl_knee_pitch_connector"/>
             <origin rpy="0 0 0" xyz="0 0 0"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}fl_knee_pitch_connector">
@@ -140,6 +144,7 @@
             <parent link="${prefix}fl_knee_pitch_connector"/>
             <child link="${prefix}fl_knee_pitch_actuator"/>
             <origin rpy="0 0 0" xyz="0 0 -0.062"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}fl_knee_pitch_actuator">
@@ -165,6 +170,7 @@
             <parent link="${prefix}fl_knee_pitch_actuator"/>
             <child link="${prefix}fl_upper_link"/>
             <origin rpy="0 0 0" xyz="0 0 0"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}fl_upper_link">
@@ -192,6 +198,7 @@
             <child link="${prefix}fl_under_link"/>
             <origin rpy="0 0 0" xyz="0.22 0 0"/>
             <limit effort="1000.0" lower="${-134 * deg2rad}" upper="${-7 * deg2rad}" velocity="0.7"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}fl_under_link">
@@ -218,6 +225,7 @@
             <parent link="${prefix}fl_under_link"/>
             <child link="${prefix}fl_foot"/>
             <origin rpy="0 0 0" xyz="0.22 0 0"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}fl_foot">
@@ -244,6 +252,7 @@
             <parent link="${prefix}base_link"/>
             <child link="${prefix}fr_hip_roll_actuator"/>
             <origin rpy="0 ${pi/2} 0" xyz="0.1415 -0.07 0"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}fr_hip_roll_actuator">
@@ -271,6 +280,7 @@
             <child link="${prefix}fr_hip_pitch_connector"/>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <limit effort="1000.0" lower="${-30 * deg2rad}" upper="${30 * deg2rad}" velocity="0.7"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}fr_hip_pitch_connector">
@@ -298,6 +308,7 @@
             <child link="${prefix}fr_hip_pitch_actuator"/>
             <origin rpy="${pi/2} 0 0" xyz="0 -${rdm_l/2} 0.068"/>
             <limit effort="1000.0" lower="${-51 * deg2rad}" upper="${93 * deg2rad}" velocity="0.7"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}fr_hip_pitch_actuator">
@@ -323,6 +334,7 @@
             <parent link="${prefix}fr_hip_pitch_actuator"/>
             <child link="${prefix}fr_knee_pitch_connector"/>
             <origin rpy="0 0 0" xyz="0 0 0"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}fr_knee_pitch_connector">
@@ -348,6 +360,7 @@
             <parent link="${prefix}fr_knee_pitch_connector"/>
             <child link="${prefix}fr_knee_pitch_actuator"/>
             <origin rpy="0 0 0" xyz="0 0 0.062"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}fr_knee_pitch_actuator">
@@ -373,6 +386,7 @@
             <parent link="${prefix}fr_knee_pitch_actuator"/>
             <child link="${prefix}fr_upper_link"/>
             <origin rpy="0 0 0" xyz="0 0 0"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}fr_upper_link">
@@ -400,6 +414,7 @@
             <child link="${prefix}fr_under_link"/>
             <origin rpy="0 0 0" xyz="0.22 0 0"/>
             <limit effort="1000.0" lower="${-134 * deg2rad}" upper="${-7 * deg2rad}" velocity="0.7"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}fr_under_link">
@@ -426,6 +441,7 @@
             <parent link="${prefix}fr_under_link"/>
             <child link="${prefix}fr_foot"/>
             <origin rpy="0 0 0" xyz="0.22 0 0"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}fr_foot">
@@ -452,6 +468,7 @@
             <parent link="${prefix}base_link"/>
             <child link="${prefix}rl_hip_roll_actuator"/>
             <origin rpy="0 ${pi/2} 0" xyz="-0.1415 0.07 0"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}rl_hip_roll_actuator">
@@ -479,6 +496,7 @@
             <child link="${prefix}rl_hip_pitch_connector"/>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <limit effort="1000.0" lower="${-30 * deg2rad}" upper="${30 * deg2rad}" velocity="0.7"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}rl_hip_pitch_connector">
@@ -506,6 +524,7 @@
             <child link="${prefix}rl_hip_pitch_actuator"/>
             <origin rpy="${pi/2} 0 0" xyz="0 ${rdm_l/2} -0.068"/>
             <limit effort="1000.0" lower="${-51 * deg2rad}" upper="${93 * deg2rad}" velocity="0.7"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}rl_hip_pitch_actuator">
@@ -531,6 +550,7 @@
             <parent link="${prefix}rl_hip_pitch_actuator"/>
             <child link="${prefix}rl_knee_pitch_connector"/>
             <origin rpy="0 0 0" xyz="0 0 0"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}rl_knee_pitch_connector">
@@ -556,6 +576,7 @@
             <parent link="${prefix}rl_knee_pitch_connector"/>
             <child link="${prefix}rl_knee_pitch_actuator"/>
             <origin rpy="0 0 0" xyz="0 0 -0.062"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}rl_knee_pitch_actuator">
@@ -581,6 +602,7 @@
             <parent link="${prefix}rl_knee_pitch_actuator"/>
             <child link="${prefix}rl_upper_link"/>
             <origin rpy="0 0 0" xyz="0 0 0"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}rl_upper_link">
@@ -608,6 +630,7 @@
             <child link="${prefix}rl_under_link"/>
             <origin rpy="0 0 0" xyz="0.22 0 0"/>
             <limit effort="1000.0" lower="${-134 * deg2rad}" upper="${-7 * deg2rad}" velocity="0.7"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}rl_under_link">
@@ -634,6 +657,7 @@
             <parent link="${prefix}rl_under_link"/>
             <child link="${prefix}rl_foot"/>
             <origin rpy="0 0 0" xyz="0.22 0 0"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}rl_foot">
@@ -660,6 +684,7 @@
             <parent link="${prefix}base_link"/>
             <child link="${prefix}rr_hip_roll_actuator"/>
             <origin rpy="0 ${pi/2} 0" xyz="-0.1415 -0.07 0"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}rr_hip_roll_actuator">
@@ -687,6 +712,7 @@
             <child link="${prefix}rr_hip_pitch_connector"/>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <limit effort="1000.0" lower="${-30 * deg2rad}" upper="${30 * deg2rad}" velocity="0.7"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}rr_hip_pitch_connector">
@@ -714,6 +740,7 @@
             <child link="${prefix}rr_hip_pitch_actuator"/>
             <origin rpy="${pi/2} 0 0" xyz="0 -${rdm_l/2} -0.068"/>
             <limit effort="1000.0" lower="${-51 * deg2rad}" upper="${93 * deg2rad}" velocity="0.7"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}rr_hip_pitch_actuator">
@@ -739,6 +766,7 @@
             <parent link="${prefix}rr_hip_pitch_actuator"/>
             <child link="${prefix}rr_knee_pitch_connector"/>
             <origin rpy="0 0 0" xyz="0 0 0"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}rr_knee_pitch_connector">
@@ -764,6 +792,7 @@
             <parent link="${prefix}rr_knee_pitch_connector"/>
             <child link="${prefix}rr_knee_pitch_actuator"/>
             <origin rpy="0 0 0" xyz="0 0 0.062"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}rr_knee_pitch_actuator">
@@ -789,6 +818,7 @@
             <parent link="${prefix}rr_knee_pitch_actuator"/>
             <child link="${prefix}rr_upper_link"/>
             <origin rpy="0 0 0" xyz="0 0 0"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}rr_upper_link">
@@ -817,6 +847,7 @@
             <child link="${prefix}rr_under_link"/>
             <origin rpy="0 0 0" xyz="0.22 0 0"/>
             <limit effort="1000.0" lower="${-134 * deg2rad}" upper="${-7 * deg2rad}" velocity="0.7"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}rr_under_link">
@@ -843,6 +874,7 @@
             <parent link="${prefix}rr_under_link"/>
             <child link="${prefix}rr_foot"/>
             <origin rpy="0 0 0" xyz="0.22 0 0"/>
+            <dynamics friction="10.0"/>
         </joint>
 
         <link name="${prefix}rr_foot">
