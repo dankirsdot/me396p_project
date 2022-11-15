@@ -24,6 +24,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'controller = padwq_bringup.controller:main',
         ],
     },
 )
