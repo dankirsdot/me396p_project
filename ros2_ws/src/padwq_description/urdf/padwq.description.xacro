@@ -66,7 +66,7 @@
         </joint>
 
         <link name="${prefix}fl_hip_pitch_connector">
-            <xacro:inertia_box mass="1" x="${rdm_l}" y="${rdm_l}" z="${connector_l}">
+            <xacro:inertia_box mass="0.05" x="${rdm_l}" y="${rdm_l}" z="${connector_l}">
                 <origin rpy="0 0 0" xyz="0 0 ${connector_l/2}"/>
             </xacro:inertia_box>
             <visual>
@@ -118,7 +118,7 @@
         </joint>
 
         <link name="${prefix}fl_knee_pitch_connector">
-            <xacro:inertia_cylinder mass="1" length="${connector_l}" radius="0.03">
+            <xacro:inertia_cylinder mass="0.05" length="${connector_l}" radius="0.03">
                 <origin rpy="0 0 0" xyz="0 0 -${connector_l/2}"/>
             </xacro:inertia_cylinder>
             <visual>
@@ -274,7 +274,7 @@
         </joint>
 
         <link name="${prefix}fr_hip_pitch_connector">
-            <xacro:inertia_box mass="1" x="${rdm_l}" y="${rdm_l}" z="${connector_l}">
+            <xacro:inertia_box mass="0.05" x="${rdm_l}" y="${rdm_l}" z="${connector_l}">
                 <origin rpy="0 0 0" xyz="0 0 ${connector_l/2}"/>
             </xacro:inertia_box>
             <visual>
@@ -326,7 +326,7 @@
         </joint>
 
         <link name="${prefix}fr_knee_pitch_connector">
-            <xacro:inertia_cylinder mass="1" length="${connector_l}" radius="0.03">
+            <xacro:inertia_cylinder mass="0.05" length="${connector_l}" radius="0.03">
                 <origin rpy="0 0 0" xyz="0 0 ${connector_l/2}"/>
             </xacro:inertia_cylinder>
             <visual>
@@ -482,7 +482,7 @@
         </joint>
 
         <link name="${prefix}rl_hip_pitch_connector">
-            <xacro:inertia_box mass="1" x="${rdm_l}" y="${rdm_l}" z="${connector_l}">
+            <xacro:inertia_box mass="0.05" x="${rdm_l}" y="${rdm_l}" z="${connector_l}">
                 <origin rpy="0 0 0" xyz="0 0 -${connector_l/2}"/>
             </xacro:inertia_box>
             <visual>
@@ -534,7 +534,7 @@
         </joint>
 
         <link name="${prefix}rl_knee_pitch_connector">
-            <xacro:inertia_cylinder mass="1" length="${connector_l}" radius="0.03">
+            <xacro:inertia_cylinder mass="0.05" length="${connector_l}" radius="0.03">
                 <origin rpy="0 0 0" xyz="0 0 -${connector_l/2}"/>
             </xacro:inertia_cylinder>
             <visual>
@@ -690,7 +690,7 @@
         </joint>
 
         <link name="${prefix}rr_hip_pitch_connector">
-            <xacro:inertia_box mass="1" x="${rdm_l}" y="${rdm_l}" z="${connector_l}">
+            <xacro:inertia_box mass="0.05" x="${rdm_l}" y="${rdm_l}" z="${connector_l}">
                 <origin rpy="0 0 0" xyz="0 0 -${connector_l/2}"/>
             </xacro:inertia_box>
             <visual>
@@ -742,7 +742,7 @@
         </joint>
 
         <link name="${prefix}rr_knee_pitch_connector">
-            <xacro:inertia_cylinder mass="1" length="${connector_l}" radius="0.03">
+            <xacro:inertia_cylinder mass="0.05" length="${connector_l}" radius="0.03">
                 <origin rpy="0 0 0" xyz="0 0 ${connector_l/2}"/>
             </xacro:inertia_cylinder>
             <visual>
