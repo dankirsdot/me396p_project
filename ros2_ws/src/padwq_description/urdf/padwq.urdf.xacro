@@ -5,18 +5,22 @@
 
     <!-- import materials -->
     <xacro:include filename="$(find padwq_description)/urdf/padwq.materials.xacro"/>
-    
+
     <!-- import robot description -->
     <xacro:include filename="$(find padwq_description)/urdf/padwq.description.xacro"/>
-    
+
     <!-- import gazebo description -->
     <xacro:include filename="$(find padwq_description)/urdf/gazebo.xacro"/>
-    
+
+    <!-- import gazebo control -->
+    <xacro:include filename="$(find padwq_description)/urdf/gazebo.control.xacro"/>
+
     <!-- import ros2_control description -->
-    <xacro:include filename="$(find padwq_description)/ros2_control/padwq.ros2_control.xacro"/>
+    <!-- <xacro:include filename="$(find padwq_description)/ros2_control/padwq.ros2_control.xacro"/> -->
 
     <xacro:padwq prefix="$(arg prefix)"/>
     <xacro:gazebo prefix="$(arg prefix)"/>
-    <xacro:padwq_ros2_control name="padwq" prefix="$(arg prefix)"/>
+    <xacro:gazebo_control prefix="$(arg prefix)"/>
+    <!-- <xacro:padwq_ros2_control name="padwq" prefix="$(arg prefix)"/> -->
 
 </robot>
