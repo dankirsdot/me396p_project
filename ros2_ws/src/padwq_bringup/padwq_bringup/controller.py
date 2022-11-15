@@ -14,26 +14,32 @@ class padwqController(Node):
         self.rx_data = []
         self.prev_joint_angs = None
 
+        self.joint_angs.data = [
+                0.0, 0.0, 0.0,
+                0.0, 0.0, 0.0,
+                0.0, 0.0, 0.0,
+                0.0, 0.0, 0.0
+        ]
+
         # self.sub = self.create_subscription(Float32MultiArray, 'padwq_joint_controller/commands', self.sub_callback, 30)
         self.pub = self.create_publisher(Float64MultiArray, 'gazebo_joint_controller/commands', 30)
         timer_period = 0.01
-        self.timerPub = self.create_timer(timer_period, self.pub_callback)
+        self.timer_pub = self.create_timer(timer_period, self.pub_callback)
 
     def sub_callback(self, msg):
         self.rx_data = []
         for data in msg.data:
             self.rx_data.append(data * np.pi/180)
         self.joint_angs.data = self.rx_data
-        self.pub_.publish(self.joint_angs)
+        self.pub.publish(self.joint_angs)
 
     def pub_callback(self):
-        pass
+        self.pub.publish(self.joint_angs)
 
 def main(args=None):
     rclpy.init(args=args)
 
     padwq_controller = padwqController()
-
     rclpy.spin(padwq_controller)
 
     # Destroy the node explicitly

@@ -81,13 +81,13 @@ def generate_launch_description():
 
     joint_state_broadcaster_node = ExecuteProcess(
             cmd=['ros2', 'control', 'load_controller',
-                '--set-state', 'start', 'joint_state_broadcaster'],
+                '--set-state', 'active', 'joint_state_broadcaster'],
         output='screen'
     )
     
     gazebo_joint_controller_node = ExecuteProcess(
         cmd=['ros2', 'control', 'load_controller',
-            '--set-state', 'start', 'gazebo_joint_controller'],
+            '--set-state', 'active', 'gazebo_joint_controller'],
         output='screen'
     )
   
