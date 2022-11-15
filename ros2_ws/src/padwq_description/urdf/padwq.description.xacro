@@ -198,7 +198,7 @@
             <child link="${prefix}fl_under_link"/>
             <origin rpy="0 0 0" xyz="0.22 0 0"/>
             <limit effort="1000.0" lower="${-134 * deg2rad}" upper="${-7 * deg2rad}" velocity="0.7"/>
-            <dynamics friction="10.0"/>
+            <dynamics damping="1.0" friction="1000.0"/>
         </joint>
 
         <link name="${prefix}fl_under_link">
@@ -414,7 +414,7 @@
             <child link="${prefix}fr_under_link"/>
             <origin rpy="0 0 0" xyz="0.22 0 0"/>
             <limit effort="1000.0" lower="${-134 * deg2rad}" upper="${-7 * deg2rad}" velocity="0.7"/>
-            <dynamics friction="10.0"/>
+            <dynamics damping="1.0" friction="1000.0"/>
         </joint>
 
         <link name="${prefix}fr_under_link">
@@ -630,7 +630,7 @@
             <child link="${prefix}rl_under_link"/>
             <origin rpy="0 0 0" xyz="0.22 0 0"/>
             <limit effort="1000.0" lower="${-134 * deg2rad}" upper="${-7 * deg2rad}" velocity="0.7"/>
-            <dynamics friction="10.0"/>
+            <dynamics damping="1.0" friction="1000.0"/>
         </joint>
 
         <link name="${prefix}rl_under_link">
@@ -847,7 +847,7 @@
             <child link="${prefix}rr_under_link"/>
             <origin rpy="0 0 0" xyz="0.22 0 0"/>
             <limit effort="1000.0" lower="${-134 * deg2rad}" upper="${-7 * deg2rad}" velocity="0.7"/>
-            <dynamics friction="10.0"/>
+            <dynamics damping="1.0" friction="1000.0"/>
         </joint>
 
         <link name="${prefix}rr_under_link">
