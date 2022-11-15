@@ -5,6 +5,7 @@ ARG ROS_DISTRO
 RUN apt-get update \
     && apt-get install -y \
             ros-${ROS_DISTRO}-desktop \
+            ros-${ROS_DISTRO}-xacro \
             ros-${ROS_DISTRO}-joint-state-publisher-gui \
             ros-${ROS_DISTRO}-ros2-control \
             ros-${ROS_DISTRO}-ros2-controllers \
