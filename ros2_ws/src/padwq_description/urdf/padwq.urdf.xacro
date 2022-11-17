@@ -8,15 +8,16 @@
 
     <!-- import robot description -->
     <xacro:include filename="$(find padwq_description)/urdf/padwq.description.xacro"/>
+    <!-- <xacro:include filename="$(find padwq_description)/urdf/padwq_simple.description.xacro"/> -->
 
     <!-- import gazebo description -->
-    <xacro:include filename="$(find padwq_description)/urdf/gazebo.xacro"/>
+    <xacro:include filename="$(find padwq_description)/urdf/padwq.gazebo.xacro"/>
 
     <!-- import ros2_control description -->
     <xacro:include filename="$(find padwq_description)/urdf/padwq.ros2_control.xacro"/>
 
     <xacro:padwq prefix="$(arg prefix)"/>
     <xacro:gazebo prefix="$(arg prefix)"/>
-    <xacro:padwq_ros2_control name="padwq" prefix="$(arg prefix)"/>
+    <xacro:padwq_ros2_control name="GazeboSimSystem" prefix="$(arg prefix)"/>
 
 </robot>

@@ -23,9 +23,9 @@ def generate_launch_description():
     )
 
     robot_name_arg = DeclareLaunchArgument(
-        name='robot_name',
-        default_value=default_robot_name,
-        description='absolute path to the robot urdf file'
+            name='robot_name',
+            default_value=default_robot_name,
+            description='absolute path to the robot urdf file'
     )
 
     use_sim_time_arg = DeclareLaunchArgument(
@@ -38,7 +38,7 @@ def generate_launch_description():
     prefix = LaunchConfiguration('prefix')
     robot_name = LaunchConfiguration('robot_name')
     use_sim_time = LaunchConfiguration('use_sim_time')
-    
+
     # define nodes
     robot_description = Command([
         'xacro ',
@@ -48,14 +48,14 @@ def generate_launch_description():
         "prefix:=",
         prefix,
     ])
-    
+
     robot_state_publisher_node = Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        parameters=[
-            {'robot_description': robot_description},
-            {'use_sim_time': use_sim_time}
-        ]
+            package='robot_state_publisher',
+            executable='robot_state_publisher',
+            parameters=[
+                {'robot_description': robot_description},
+                {'use_sim_time': use_sim_time}
+            ]
     )
 
     gazebo_node = IncludeLaunchDescription(
@@ -67,7 +67,7 @@ def generate_launch_description():
                 ])
             ]),
     )
-    
+
     gazebo_spawn_node = Node(
             package='gazebo_ros',
             executable='spawn_entity.py',
@@ -82,19 +82,19 @@ def generate_launch_description():
     joint_state_broadcaster_node = ExecuteProcess(
             cmd=['ros2', 'control', 'load_controller',
                 '--set-state', 'active', 'joint_state_broadcaster'],
-        output='screen'
+            output='screen'
     )
-    
-    gazebo_joint_controller_node = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller',
-            '--set-state', 'active', 'gazebo_joint_controller'],
-        output='screen'
+
+    joint_trajectory_controller_node = ExecuteProcess(
+            cmd=['ros2', 'control', 'load_controller',
+                '--set-state', 'active', 'joint_trajectory_controller'],
+            output='screen'
     )
-  
+
     controller_node = Node(
-        package='padwq_bringup',
-        executable='controller',
-        name='controller'
+            package='padwq_bringup',
+            executable='controller',
+            name='controller'
     )
 
     ld = LaunchDescription([
@@ -105,8 +105,8 @@ def generate_launch_description():
         gazebo_node,
         gazebo_spawn_node,
         joint_state_broadcaster_node,
-        gazebo_joint_controller_node,
-        controller_node
+        joint_trajectory_controller_node,
+        # controller_node
     ])
 
     return ld

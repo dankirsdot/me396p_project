@@ -15,10 +15,11 @@ class padwqController(Node):
         self.prev_joint_angs = None
 
         self.joint_angs.data = [
-                0.0, 0.0, 0.0,
-                0.0, 0.0, 0.0,
-                0.0, 0.0, 0.0,
-                0.0, 0.0, 0.0
+            # 0.0, -np.pi/4, np.pi/3,
+            0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0,
         ]
 
         # self.sub = self.create_subscription(Float32MultiArray, 'padwq_joint_controller/commands', self.sub_callback, 30)
@@ -34,7 +35,8 @@ class padwqController(Node):
         self.pub.publish(self.joint_angs)
 
     def pub_callback(self):
-        self.pub.publish(self.joint_angs)
+        # self.pub.publish(self.joint_angs)
+        pass
 
 def main(args=None):
     rclpy.init(args=args)

@@ -20,7 +20,7 @@
             <joint name="${prefix}fl_hip_pitch">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                    <param name="initial_value">0.0</param>
+                    <param name="initial_value">${-pi / 4}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
                 <state_interface name="effort"/>
@@ -29,7 +29,7 @@
             <joint name="${prefix}fl_knee_pitch">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                    <param name="initial_value">0.0</param>
+                    <param name="initial_value">${pi / 3}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
                 <state_interface name="effort"/>
@@ -47,7 +47,7 @@
             <joint name="${prefix}fr_hip_pitch">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                    <param name="initial_value">0.0</param>
+                    <param name="initial_value">${-pi / 4}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
                 <state_interface name="effort"/>
@@ -56,12 +56,12 @@
             <joint name="${prefix}fr_knee_pitch">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                    <param name="initial_value">0.0</param>
+                    <param name="initial_value">${pi / 3}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
                 <state_interface name="effort"/>
             </joint>
-            
+
             <joint name="${prefix}rl_hip_roll">
                 <command_interface name="position"/>
                 <state_interface name="position">
@@ -74,7 +74,7 @@
             <joint name="${prefix}rl_hip_pitch">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                    <param name="initial_value">0.0</param>
+                    <param name="initial_value">${-pi / 4}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
                 <state_interface name="effort"/>
@@ -83,7 +83,7 @@
             <joint name="${prefix}rl_knee_pitch">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                    <param name="initial_value">0.0</param>
+                    <param name="initial_value">${pi / 3}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
                 <state_interface name="effort"/>
@@ -101,7 +101,7 @@
             <joint name="${prefix}rr_hip_pitch">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                    <param name="initial_value">0.0</param>
+                    <param name="initial_value">${-pi / 4}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
                 <state_interface name="effort"/>
@@ -110,7 +110,7 @@
             <joint name="${prefix}rr_knee_pitch">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                    <param name="initial_value">0.0</param>
+                    <param name="initial_value">${pi / 3}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
                 <state_interface name="effort"/>
