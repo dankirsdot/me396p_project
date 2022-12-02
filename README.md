@@ -74,7 +74,7 @@ ros2 launch padwq_bringup gazebo.launch.py
 
 
 ## Simple MPC demo
-While learning the concept of the MPC control, we created a simple demo where we are controlling bicycle model - simplified model of the vehicle. We used its steering angle and forward velocity in order to control one using MPC. You can go to the folder ``mpc_demo`` and run it from the Docker container with the following command:
+While learning the concept of the MPC control, we created a simple demo where we are controlling [bicycle model](https://sumemura.jp/simplified-steady-state-vehicle-handling-model/) - simplified model of the vehicle. We used its steering angle and forward velocity in order to control one using MPC. You can go to the folder ``mpc_demo`` and run it from the Docker container with the following command:
 
 ```bash
 python main.py
